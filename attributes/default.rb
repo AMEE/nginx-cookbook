@@ -1,15 +1,16 @@
-default[:nginx][:version]            = "1.0.12"
+default[:nginx][:version]              = "1.0.14"
 
-set[:nginx][:dir]                    = "/etc/nginx"
-set[:nginx][:log_dir]                = "/var/log/nginx"
-set[:nginx][:binary]                 = "/usr/sbin/nginx"
+default[:nginx][:dir]                  = "/etc/nginx"
+default[:nginx][:log_dir]              = "/var/log/nginx"
+default[:nginx][:binary]               = "/usr/sbin/nginx"
 
-set[:nginx][:user]                   = "www-data"
-default[:nginx][:worker_processes]   = cpu[:total]
-default[:nginx][:pid]                = "/var/run/nginx.pid"
+default[:nginx][:user]                 = "www-data"
+default[:nginx][:worker_processes]     = cpu[:total]
+default[:nginx][:worker_rlimit_nofile] = "-"
+default[:nginx][:pid]                  = "/var/run/nginx.pid"
 
-default[:nginx][:worker_connections] = 1024
-default[:nginx][:multi_accept]       = "off"
+default[:nginx][:worker_connections]   = 1024
+default[:nginx][:multi_accept]         = "off"
 
 # Directive sets the read timeout for the request body from client. The timeout
 # is set only if a body is not get in one readstep. If after this time the
