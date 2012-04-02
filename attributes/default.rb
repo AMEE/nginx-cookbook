@@ -6,7 +6,7 @@ default[:nginx][:binary]               = "/usr/sbin/nginx"
 
 default[:nginx][:user]                 = "www-data"
 default[:nginx][:worker_processes]     = cpu[:total]
-default[:nginx][:worker_rlimit_nofile] = "-"
+default[:nginx][:worker_rlimit_nofile] = 768
 default[:nginx][:pid]                  = "/var/run/nginx.pid"
 
 default[:nginx][:worker_connections]   = 1024
