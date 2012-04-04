@@ -14,3 +14,4 @@ supports "debian"
 
 depends "build-essential"
 depends "apt"
+depends "htauth"

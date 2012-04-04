@@ -8,10 +8,17 @@ upstream <%= @app.name %> {
 
 server {
   listen <%= @app.server_port %>;
-  server_name <%= @app.server_name %>;
+  server_name <%= "#{@app.server_name}" %>;
 
   root <%= @app.public_path %>;
   try_files $uri/index.html $uri @<%= @app.name %>;
+
+  <% if @app.htauth -%>
+  location / {
+    auth_basic "Restricted";
+    auth_basic_user_file <%= "#{@app.public_path}/htpasswd" %>;
+  }
+  <% end -%>
 
   location @<%= @app.name %> {
     <%= @app.access_control.join("\n\s\s\s\s") %>
@@ -26,9 +33,12 @@ server {
     <% end -%>
   }
 
-  error_page 500 502 503 504 /500.html;
-  client_max_body_size 4G;
-  keepalive_timeout 10;
+  <% {
+       "404" => "404",
+       "500" => "500 502"
+     }.each do |page, errors| %>
+    <%= "error_page #{errors} /#{page}.html;" %>
+  <% end %>
 
   <%= @app.custom_directives.join("\n\s\s") + "\n" -%>
 }

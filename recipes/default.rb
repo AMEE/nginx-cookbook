@@ -1,11 +1,11 @@
 require_recipe "apt"
 
-apt_repository "nginx" do
-  uri "http://ppa.launchpad.net/nginx/stable/ubuntu"
-  keyserver "keyserver.ubuntu.com"
-  key "C300EE8C"
-  action :add
-end
+#apt_repository "nginx" do
+#  uri "http://ppa.launchpad.net/nginx/stable/ubuntu"
+#  keyserver "keyserver.ubuntu.com"
+#  key "C300EE8C"
+#  action :add
+#end
 
 package "nginx"
 
